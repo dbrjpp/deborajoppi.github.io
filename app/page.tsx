@@ -1,13 +1,10 @@
 "use client";
-
 import React from "react";
-
-const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export default function DeboraSite() {
   const links = {
     email: "mailto:deborajoppi@gmail.com",
-    github: "https://github.com/dehjoppi",
+    github: "https://github.com/dbrjpp",
     linkedin: "https://www.linkedin.com/in/deborajoppi/",
     scholar: "https://scholar.google.com/", // optional
     cv: "#", // link to PDF when ready
@@ -47,11 +44,9 @@ export default function DeboraSite() {
           {/* Avatar */}
           <div className="shrink-0">
             <div className="size-32 md:size-40 rounded-full overflow-hidden ring-1 ring-neutral-200 bg-neutral-100">
-              const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-// ...
-<img src="debora-portrait.jpg" alt="Débora Joppi" className="w-full h-full object-cover" />
+  <img src="debora-portrait.jpg" alt="Débora Joppi" className="w-full h-full object-cover" />
+</div>
 
-            </div>
           </div>
 
           {/* Intro */}

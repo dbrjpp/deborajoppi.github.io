@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
 
-const repo = "deborajoppi.github.io"; // your repo name
+const repo = "deborajoppi.github.io";
 
 const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
   basePath: `/${repo}`,
   assetPrefix: `/${repo}/`,
-  trailingSlash: true, // helps Pages serve static files
+  trailingSlash: true,
 };
 
 export default nextConfig;
