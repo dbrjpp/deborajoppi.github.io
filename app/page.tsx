@@ -2,6 +2,8 @@
 
 import React from "react";
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function DeboraSite() {
   const links = {
     email: "mailto:deborajoppi@gmail.com",
