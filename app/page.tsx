@@ -45,7 +45,10 @@ export default function DeboraSite() {
           {/* Avatar */}
           <div className="shrink-0">
             <div className="size-32 md:size-40 rounded-full overflow-hidden ring-1 ring-neutral-200 bg-neutral-100">
-              <img src="/debora-portrait.jpg" alt="Débora Joppi" className="w-full h-full object-cover" />
+              const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+// ...
+<img src={`${base}/debora-portrait.jpg`} alt="Débora Joppi" className="w-full h-full object-cover" />
+
             </div>
           </div>
 
