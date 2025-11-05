@@ -1,23 +1,19 @@
+// next.config.ts
 import type { NextConfig } from "next";
 
-const repoBase = "/deborajoppi.github.io"; // your repo name
+const isProd = process.env.NODE_ENV === "production";
+const repo = "deborajoppi.github.io";
 
 const nextConfig: NextConfig = {
-  // replaces `next export`
   output: "export",
 
-  // GitHub Pages subpath
-  basePath: repoBase,
-  assetPrefix: `${repoBase}/`,
+  // ✅ Only add basePath on GitHub Pages build
+  basePath: isProd ? `/${repo}` : "",
 
-  // folders with index.html work better on GH Pages with trailing slashes
-  trailingSlash: true,
+  // ✅ Only prefix assets in production
+  assetPrefix: isProd ? `/${repo}/` : undefined,
 
-  // disable server image optimization in static export
   images: { unoptimized: true },
-
-  // optional: quiet some warnings
-  experimental: { optimizePackageImports: [] },
 };
 
 export default nextConfig;
