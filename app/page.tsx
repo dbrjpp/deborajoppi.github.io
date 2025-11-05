@@ -4,9 +4,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
-// ✅ No manual basePath here — Next handles it in prod
-const basePath = "";
-
 export default function Home() {
   const container = {
     hidden: { opacity: 0 },
