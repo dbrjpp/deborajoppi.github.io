@@ -27,7 +27,7 @@ export default function ScienceLayout({ children }: { children: ReactNode }) {
       <div className="mx-auto max-w-5xl px-4 py-10">{children}</div>
 
       <footer className="mx-auto max-w-5xl px-4 py-10 text-xs text-neutral-500 text-center">
-        © {new Date().getFullYear()} Débora Joppi. Built with Next.js · static export.
+        © {new Date().getFullYear()} Débora Joppi.
       </footer>
     </main>
   );
