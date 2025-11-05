@@ -1,9 +1,7 @@
 // app/science/layout.tsx
 import type { ReactNode } from "react";
-import dynamic from "next/dynamic";
-
-// Load tabs only on the client to avoid SSR issues with usePathname
-const NavTabs = dynamic(() => import("./nav-tabs"), { ssr: false });
+import { Suspense } from "react";
+import NavTabs from "./nav-tabs"; // <-- client component ("use client" at top of that file)
 
 export const metadata = {
   title: "Science — Débora Joppi",
@@ -17,12 +15,16 @@ export default function ScienceLayout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-neutral-200">
         <div className="mx-auto max-w-5xl px-4 py-3">
           <div className="flex items-center justify-between">
+            {/* You can also link this back to the landing: href="/" */}
             <a href="#about" className="font-semibold tracking-tight">
               Débora Joppi
             </a>
           </div>
-          {/* Tabs mount client-side */}
-          <NavTabs />
+
+          {/* Render the client-only tabs inside Suspense to avoid hydration timing hiccups */}
+          <Suspense fallback={null}>
+            <NavTabs />
+          </Suspense>
         </div>
       </header>
 
