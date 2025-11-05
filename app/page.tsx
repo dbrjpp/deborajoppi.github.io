@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
-// ✅ Prefix internal links so they work on GitHub Pages
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+// ✅ No manual basePath here — Next handles it in prod
+const basePath = "";
 
 export default function Home() {
   const container = {
@@ -29,15 +29,17 @@ export default function Home() {
         animate="show"
         className="relative z-10 flex min-h-screen flex-col items-center justify-center p-6"
       >
-        {/* Header (only the question) */}
+        {/* Header */}
         <motion.header variants={item} className="mb-10 text-center">
-          <p className="mt-3 text-base md:text-lg text-neutral-700">What would you like to see? :)</p>
+          <p className="mt-3 text-base md:text-lg text-neutral-700">
+            What would you like to see? 🙂
+          </p>
         </motion.header>
 
         {/* Cards */}
         <motion.div variants={item} className="grid w-full max-w-4xl grid-cols-1 md:grid-cols-2 gap-6">
-          <SelectorCard href={`${basePath}/science`} label="science" bg="bg-[#cfe7de]" ring="ring-[#7aa69a]" />
-          <SelectorCard href={`${basePath}/art`}     label="art"     bg="bg-[#f9d5cc]" ring="ring-[#d7a39a]" />
+          <SelectorCard href="/science" label="science" bg="bg-[#cfe7de]" ring="ring-[#7aa69a]" />
+          <SelectorCard href="/art" label="art" bg="bg-[#f9d5cc]" ring="ring-[#d7a39a]" />
         </motion.div>
 
         {/* Tip */}
@@ -45,13 +47,13 @@ export default function Home() {
           Tip: press <kbd className="px-1 py-0.5 border rounded">S</kbd> or <kbd className="px-1 py-0.5 border rounded">A</kbd> to jump.
         </motion.p>
 
-        {/* Footer (centered) */}
+        {/* Footer */}
         <motion.footer variants={item} className="mt-10 text-xs md:text-sm text-neutral-600 text-center">
           © {new Date().getFullYear()} Débora Joppi.
         </motion.footer>
       </motion.main>
 
-      {/* Mount keyboard shortcuts */}
+      {/* Keyboard shortcuts */}
       <KeyShortcuts />
     </div>
   );
@@ -80,15 +82,15 @@ function SelectorCard({ href, label, bg, ring }: { href: string; label: string; 
 }
 
 function KeyShortcuts() {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const key = e.key?.toLowerCase();
-      if (key === "s") window.location.href = `${basePath}/science`;
-      if (key === "a") window.location.href = `${basePath}/art`;
+      if (key === "s") window.location.href = "/science";
+      if (key === "a") window.location.href = "/art";
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [basePath]);
+  }, []);
+
   return null;
 }
