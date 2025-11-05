@@ -45,12 +45,13 @@ export default function Home() {
           Tip: press <kbd className="px-1 py-0.5 border rounded">S</kbd> or <kbd className="px-1 py-0.5 border rounded">A</kbd> to jump.
         </motion.p>
 
-        {/* Footer with name/year */}
+        {/* Footer (centered) */}
         <motion.footer variants={item} className="mt-10 text-xs md:text-sm text-neutral-600 text-center">
-          Débora Joppi {new Date().getFullYear()}
+          © {new Date().getFullYear()} Débora Joppi.
         </motion.footer>
       </motion.main>
 
+      {/* Mount keyboard shortcuts */}
       <KeyShortcuts />
     </div>
   );
