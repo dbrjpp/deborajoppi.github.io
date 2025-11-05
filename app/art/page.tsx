@@ -1,20 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useCallback, useEffect } from "react";
 
-// 🖼️ Add or reorder your images here (path is relative to /public)
+// 🖼️ Images relative to /public
 const PHOTOS = [
-  { src: "/art/photo-01.jpg", alt: "Banana tree, Florianópolis, Brazil" },
-  { src: "/art/photo-02.jpg", alt: "Florianópolis, Brazil" },
-  { src: "/art/photo-10.jpg", alt: "Winter" },
-  // add more...
+  { src: "art/photo-01.jpg", alt: "Banana tree, Florianópolis, Brazil" },
+  { src: "art/photo-02.jpg", alt: "Florianópolis, Brazil" },
+  { src: "art/photo-10.jpg", alt: "Winter" },
 ];
 
 export default function ArtPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // keyboard nav for lightbox
   useEffect(() => {
     if (openIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -34,22 +33,15 @@ export default function ArtPage() {
       <header className="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-neutral-200">
         <div className="mx-auto max-w-5xl px-4 py-4">
           <div className="flex items-center justify-between">
-            <a href="/" className="font-medium hover:underline underline-offset-4">← Home</a>
+            <Link href="/" className="font-medium hover:underline underline-offset-4">← Home</Link>
             <h1 className="text-lg font-semibold tracking-tight">Art</h1>
-            <a href="/science" className="text-sm hover:underline underline-offset-4">Science →</a>
+            <Link href="/science" className="text-sm hover:underline underline-offset-4">Science →</Link>
           </div>
         </div>
       </header>
 
-      {/* Gallery */}
       <section className="mx-auto max-w-5xl px-4 py-8">
-        <div
-          className="
-            grid gap-4
-            sm:grid-cols-2
-            md:grid-cols-3
-          "
-        >
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {PHOTOS.map((p, i) => (
             <button
               key={p.src}
@@ -64,7 +56,7 @@ export default function ArtPage() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                 className="object-cover transition-transform duration-200 group-hover:scale-105"
                 unoptimized
-                priority={i < 6} // prefetch first few
+                priority={i < 6}
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
             </button>
@@ -76,7 +68,6 @@ export default function ArtPage() {
         </p>
       </section>
 
-      {/* Lightbox */}
       {openIndex !== null && (
         <Lightbox
           index={openIndex}
@@ -94,27 +85,18 @@ export default function ArtPage() {
   );
 }
 
-function Lightbox({
-  photo,
-  index,
-  onClose,
-  onPrev,
-  onNext,
-}: {
+function Lightbox({ photo, onClose, onPrev, onNext }: {
   photo: { src: string; alt?: string };
   index: number;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
 }) {
-  // prevent background scroll
   useEffect(() => {
     const { body } = document;
     const prev = body.style.overflow;
     body.style.overflow = "hidden";
-    return () => {
-      body.style.overflow = prev;
-    };
+    return () => { body.style.overflow = prev; };
   }, []);
 
   return (
@@ -134,29 +116,9 @@ function Lightbox({
           sizes="100vw"
           priority
         />
-
-        {/* Controls */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow"
-          aria-label="Close"
-        >
-          Close
-        </button>
-        <button
-          onClick={onPrev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow"
-          aria-label="Previous"
-        >
-          ← Prev
-        </button>
-        <button
-          onClick={onNext}
-          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow"
-          aria-label="Next"
-        >
-          Next →
-        </button>
+        <button onClick={onClose} className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow">Close</button>
+        <button onClick={onPrev} className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow">← Prev</button>
+        <button onClick={onNext} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow">Next →</button>
       </div>
     </div>
   );
