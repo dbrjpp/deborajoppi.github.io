@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
+// ✅ Prefix internal links so they work on GitHub Pages
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function Home() {
   const container = {
     hidden: { opacity: 0 },
@@ -33,8 +36,8 @@ export default function Home() {
 
         {/* Cards */}
         <motion.div variants={item} className="grid w-full max-w-4xl grid-cols-1 md:grid-cols-2 gap-6">
-          <SelectorCard href="/science" label="science" bg="bg-[#cfe7de]" ring="ring-[#7aa69a]" />
-          <SelectorCard href="/art" label="art" bg="bg-[#f9d5cc]" ring="ring-[#d7a39a]" />
+          <SelectorCard href={`${basePath}/science`} label="science" bg="bg-[#cfe7de]" ring="ring-[#7aa69a]" />
+          <SelectorCard href={`${basePath}/art`}     label="art"     bg="bg-[#f9d5cc]" ring="ring-[#d7a39a]" />
         </motion.div>
 
         {/* Tip */}
@@ -76,14 +79,15 @@ function SelectorCard({ href, label, bg, ring }: { href: string; label: string; 
 }
 
 function KeyShortcuts() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const key = e.key?.toLowerCase();
-      if (key === "s") window.location.href = "/science";
-      if (key === "a") window.location.href = "/art";
+      if (key === "s") window.location.href = `${basePath}/science`;
+      if (key === "a") window.location.href = `${basePath}/art`;
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [basePath]);
   return null;
 }

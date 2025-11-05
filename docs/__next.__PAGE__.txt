@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
 2:I[47257,["/deborajoppi.github.io/_next/static/chunks/ff1a16fafef87110.js","/deborajoppi.github.io/_next/static/chunks/247eb132b7f7b574.js"],"ClientPageRoot"]
-3:I[31713,["/deborajoppi.github.io/_next/static/chunks/3f8ff96fa9023cf7.js","/deborajoppi.github.io/_next/static/chunks/14c489680f28a50d.js"],"default"]
+3:I[31713,["/deborajoppi.github.io/_next/static/chunks/3f8ff96fa9023cf7.js","/deborajoppi.github.io/_next/static/chunks/9225d0e2425015a6.js"],"default"]
 6:I[97367,["/deborajoppi.github.io/_next/static/chunks/ff1a16fafef87110.js","/deborajoppi.github.io/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"buildId":"fTLlsLv1Rk6uVETcTkv35","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/deborajoppi.github.io/_next/static/chunks/3f8ff96fa9023cf7.js","async":true}],["$","script","script-1",{"src":"/deborajoppi.github.io/_next/static/chunks/14c489680f28a50d.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"nJ5AtkTprnNpDq7TFDYEY","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/deborajoppi.github.io/_next/static/chunks/3f8ff96fa9023cf7.js","async":true}],["$","script","script-1",{"src":"/deborajoppi.github.io/_next/static/chunks/9225d0e2425015a6.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
