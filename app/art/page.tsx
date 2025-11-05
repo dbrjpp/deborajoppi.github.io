@@ -1,16 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useCallback, useEffect } from "react";
 
-// 🖼️ Images relative to /public
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+// Keep your filenames with leading slash (relative to /public)
 const PHOTOS = [
   { src: "/art/photo-01.jpg", alt: "Banana tree, Florianópolis, Brazil" },
   { src: "/art/photo-02.jpg", alt: "Florianópolis, Brazil" },
   { src: "/art/photo-10.jpg", alt: "Winter" },
 ];
-
 
 export default function ArtPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -19,8 +19,8 @@ export default function ArtPage() {
     if (openIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpenIndex(null);
-      if (e.key === "ArrowRight") setOpenIndex((i) => (i === null ? null : (i + 1) % PHOTOS.length));
-      if (e.key === "ArrowLeft") setOpenIndex((i) => (i === null ? null : (i - 1 + PHOTOS.length) % PHOTOS.length));
+      if (e.key === "ArrowRight") setOpenIndex(i => (i === null ? null : (i + 1) % PHOTOS.length));
+      if (e.key === "ArrowLeft") setOpenIndex(i => (i === null ? null : (i - 1 + PHOTOS.length) % PHOTOS.length));
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -50,14 +50,11 @@ export default function ArtPage() {
               className="group relative aspect-[4/5] overflow-hidden rounded-xl border border-neutral-200 bg-white"
               aria-label={`Open ${p.alt || "photo"}`}
             >
-              <Image
-                src={p.src}
+              <img
+                src={`${BASE}${p.src}`}   // <-- basePath prefix here
                 alt={p.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                className="object-cover transition-transform duration-200 group-hover:scale-105"
-                unoptimized
-                priority={i < 6}
+                className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+                loading={i < 6 ? "eager" : "lazy"}
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
             </button>
@@ -73,9 +70,9 @@ export default function ArtPage() {
         <Lightbox
           index={openIndex}
           onClose={close}
-          onPrev={() => setOpenIndex((i) => (i === null ? null : (i - 1 + PHOTOS.length) % PHOTOS.length))}
-          onNext={() => setOpenIndex((i) => (i === null ? null : (i + 1) % PHOTOS.length))}
-          photo={PHOTOS[openIndex]}
+          onPrev={() => setOpenIndex(i => (i === null ? null : (i - 1 + PHOTOS.length) % PHOTOS.length))}
+          onNext={() => setOpenIndex(i => (i === null ? null : (i + 1) % PHOTOS.length))}
+          photo={{ ...PHOTOS[openIndex], src: `${BASE}${PHOTOS[openIndex].src}` }} // prefix in lightbox too
         />
       )}
 
@@ -86,7 +83,13 @@ export default function ArtPage() {
   );
 }
 
-function Lightbox({ photo, onClose, onPrev, onNext }: {
+function Lightbox({
+  photo,
+  index,
+  onClose,
+  onPrev,
+  onNext,
+}: {
   photo: { src: string; alt?: string };
   index: number;
   onClose: () => void;
@@ -94,10 +97,9 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
   onNext: () => void;
 }) {
   useEffect(() => {
-    const { body } = document;
-    const prev = body.style.overflow;
-    body.style.overflow = "hidden";
-    return () => { body.style.overflow = prev; };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
   }, []);
 
   return (
@@ -108,15 +110,7 @@ function Lightbox({ photo, onClose, onPrev, onNext }: {
       aria-modal="true"
     >
       <div className="relative w-full max-w-5xl h-[70vh]" onClick={(e) => e.stopPropagation()}>
-        <Image
-          src={photo.src}
-          alt={photo.alt || ""}
-          fill
-          className="object-contain"
-          unoptimized
-          sizes="100vw"
-          priority
-        />
+        <img src={photo.src} alt={photo.alt || ""} className="w-full h-full object-contain" />
         <button onClick={onClose} className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow">Close</button>
         <button onClick={onPrev} className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow">← Prev</button>
         <button onClick={onNext} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium shadow">Next →</button>
