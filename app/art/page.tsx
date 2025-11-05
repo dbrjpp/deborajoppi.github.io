@@ -6,10 +6,11 @@ import { useState, useCallback, useEffect } from "react";
 
 // 🖼️ Images relative to /public
 const PHOTOS = [
-  { src: "art/photo-01.jpg", alt: "Banana tree, Florianópolis, Brazil" },
-  { src: "art/photo-02.jpg", alt: "Florianópolis, Brazil" },
-  { src: "art/photo-10.jpg", alt: "Winter" },
+  { src: "/art/photo-01.jpg", alt: "Banana tree, Florianópolis, Brazil" },
+  { src: "/art/photo-02.jpg", alt: "Florianópolis, Brazil" },
+  { src: "/art/photo-10.jpg", alt: "Winter" },
 ];
+
 
 export default function ArtPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
