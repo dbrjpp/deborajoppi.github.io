@@ -5,10 +5,9 @@ import { useState, useCallback, useEffect } from "react";
 
 // 🖼️ Add or reorder your images here (path is relative to /public)
 const PHOTOS = [
-  { src: "/art/bananeira.png", alt: "Banana tree, Florianópolis, Brazil" },
-  { src: "/art/casa.png", alt: "Florianópolis, Brazil" },
-  { src: "/art/flores.png", alt: "Winter" },
-  { src: "/art/IMG_6205.png", alt: "35mm" },
+  { src: "/art/photo-01.jpg", alt: "Banana tree, Florianópolis, Brazil" },
+  { src: "/art/photo-02.jpg", alt: "Florianópolis, Brazil" },
+  { src: "/art/photo-10.jpg", alt: "Winter" },
   // add more...
 ];
 
